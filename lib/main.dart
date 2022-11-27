@@ -11,8 +11,28 @@ class ExpensesApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: MyHomePage(),
+    return MaterialApp(
+      home: const MyHomePage(),
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.cyan)
+            .copyWith(secondary: Colors.pink[300]),
+        fontFamily: 'Quicksand',
+        appBarTheme: const AppBarTheme(
+          titleTextStyle: TextStyle(
+            fontFamily: 'OpenSans',
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        textTheme: ThemeData.light().textTheme.copyWith(
+              headline6: const TextStyle(
+                fontFamily: 'OpenSans',
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+      ),
     );
   }
 }
@@ -68,7 +88,6 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.purple,
         title: const Text('Despesas Pessoais'),
         actions: [
           IconButton(
@@ -82,12 +101,12 @@ class _MyHomePageState extends State<MyHomePage> {
           // mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const SizedBox(
+            SizedBox(
               // width: double.infinity,
               child: Card(
-                color: Colors.blue,
+                color: Theme.of(context).colorScheme.primary,
                 elevation: 5,
-                child: Text('Gráfico'),
+                child: const Text('Gráfico'),
               ),
             ),
             TransactionList(transactions: _transactions),
@@ -95,7 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.purple,
+        // backgroundColor: Colors.purple,
         child: const Icon(Icons.add),
         onPressed: () => _openTransactionFormModal(context),
       ),
