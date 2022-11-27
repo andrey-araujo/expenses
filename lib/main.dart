@@ -1,5 +1,8 @@
-import 'package:expenses/components/transaction_user.dart';
+import 'dart:math';
+import 'package:expenses/components/transaction_form.dart';
 import 'package:flutter/material.dart';
+import 'components/transaction_list.dart';
+import 'models/transaction.dart';
 
 void main() => runApp(const ExpensesApp());
 
@@ -14,8 +17,50 @@ class ExpensesApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final _transactions = [
+    Transaction(
+      id: 't1',
+      title: 'Novo Tênis de corrida',
+      value: 310.76,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't2',
+      title: 'Conta de Luz',
+      value: 211.30,
+      date: DateTime.now(),
+    ),
+  ];
+
+  _addTransaction(String title, double value) {
+    final newTransaction = Transaction(
+      id: Random().nextDouble().toString(),
+      title: title,
+      value: value,
+      date: DateTime.now(),
+    );
+
+    setState(() {
+      _transactions.add(newTransaction);
+    });
+  }
+
+  _openTransactionFormModal(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (_) {
+        return TransactionForm(null);
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +79,8 @@ class MyHomePage extends StatelessWidget {
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: const [
-            SizedBox(
+          children: [
+            const SizedBox(
               // width: double.infinity,
               child: Card(
                 color: Colors.blue,
@@ -43,7 +88,12 @@ class MyHomePage extends StatelessWidget {
                 child: Text('Gráfico'),
               ),
             ),
-            TransactionUser(),
+            Column(
+              children: <Widget>[
+                TransactionForm(onSubmit: _addTransaction),
+                TransactionList(transactions: _transactions),
+              ],
+            )
           ],
         ),
       ),
@@ -52,8 +102,7 @@ class MyHomePage extends StatelessWidget {
         child: const Icon(Icons.add),
         onPressed: () {},
       ),
-      floatingActionButtonLocation:
-          FloatingActionButtonLocation.centerFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
