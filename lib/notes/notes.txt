@@ -1,0 +1,42 @@
+O código ficará assim:
+
+class Transaction {
+  final String id;
+  final String title;
+  final double value;
+  final DateTime date;
+ 
+  Transaction({
+    required this.id,
+    required this.title,
+    required this.value,
+    required this.date,
+  });
+}
+
+
+1. intl: ^0.17.0
+
+
+TextButton (
+  style: TextButton .stylefrom
+  backgroundCo lor: Colors.blue,
+  primary: Colors.white,
+  child: const Text ('Text Button'),
+  onPressed: () {},
+
+Elevated Button (
+style: E levatedBut ton. styleF rom (
+primary: Colors.blue,
+onPrimary: Colors, black,
+I
+child: const Text ( 'Elevated Button'),
+onPressed: () {},
+, 1/ Elevated But ton
+
+ a dupla interrogação é um operador "if null". Basicamente se o resultado do parse resultar nulo, VALUE assume valor '0.0'.
+
+?? -- if null operator
+??= -- null-aware assignment
+x?.p -- null-aware access
+x?.m() -- null-aware method invocation
