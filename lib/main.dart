@@ -57,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
     showModalBottomSheet(
       context: context,
       builder: (_) {
-        return TransactionForm(null);
+        return TransactionForm(onSubmit: _addTransaction);
       },
     );
   }
@@ -71,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
         actions: [
           IconButton(
             icon: const Icon(Icons.add),
-            onPressed: () {},
+            onPressed: () => _openTransactionFormModal(context),
           )
         ],
       ),
@@ -88,19 +88,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Text('Gráfico'),
               ),
             ),
-            Column(
-              children: <Widget>[
-                TransactionForm(onSubmit: _addTransaction),
-                TransactionList(transactions: _transactions),
-              ],
-            )
+            TransactionList(transactions: _transactions),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.purple,
         child: const Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () => _openTransactionFormModal(context),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
