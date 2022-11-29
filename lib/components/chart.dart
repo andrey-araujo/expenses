@@ -13,9 +13,24 @@ class Chart extends StatelessWidget {
         Duration(days: index),
       );
 
+      double totalSum = 0.0;
+
+      for (var i = 0; i < recentTransactions.length; i++) {
+        bool sameDay = recentTransactions[i].date.day == weekDay.day;
+        bool sameMonth = recentTransactions[i].date.day == weekDay.month;
+        bool sameYear = recentTransactions[i].date.day == weekDay.year;
+
+        if (sameDay && sameMonth && sameYear) {
+          totalSum += recentTransactions[i].value;
+        }
+      }
+
+      print(DateFormat.E().format(weekDay)[0]);
+      print(totalSum);
+
       return {
-        'day': 'T',
-        'value': 9.99,
+        'day': DateFormat.E().format(weekDay)[0],
+        'value': totalSum,
       };
     });
   }
