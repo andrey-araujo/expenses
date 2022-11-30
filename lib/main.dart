@@ -31,7 +31,7 @@ class ExpensesApp extends StatelessWidget {
                 fontFamily: 'OpenSans',
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
-                color: Colors.amber,
+                color: Colors.black,
               ),
             ),
       ),
