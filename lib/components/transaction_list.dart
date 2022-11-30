@@ -1,69 +1,82 @@
-import 'package:expenses/models/transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import 'package:expenses/models/transaction.dart';
+
 class TransactionList extends StatelessWidget {
-  const TransactionList({Key? key, required this.transactions})
-      : super(key: key);
+  const TransactionList(this.transactions, this.onRemove, {Key? key}) : super(key: key);
 
   final List<Transaction> transactions;
+  final void Function(String) onRemove;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 500,
-      child: ListView.builder(
-        itemCount: transactions.length,
-        itemBuilder: (ctx, index) {
-          final tr = transactions[index];
-          return Card(
-            child: Row(
+      height: 460,
+      child: transactions.isEmpty
+          ? Column(
               children: [
-                Container(
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 15,
-                    vertical: 10,
-                  ),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.purple,
-                      width: 2,
-                    ),
-                  ),
-                  padding: const EdgeInsets.all(6),
-                  child: Text(
-                    'R\$ ${tr.value.toStringAsFixed(2)}',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 13,
-                      color: Colors.purple,
-                    ),
-                  ),
+                const SizedBox(
+                  height: 20,
                 ),
-                Column(
-                  // mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      tr.title,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
-                    Text(
-                      DateFormat('d MMM y').format(tr.date),
-                      style: const TextStyle(
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ],
+                Text(
+                  'Não há transações cadastradas.',
+                  style: Theme.of(context).textTheme.headline6,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                SizedBox(
+                  height: 200,
+                  child: Image.asset(
+                    'assets/images/waiting.png',
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ],
+            )
+          : ListView.builder(
+              itemCount: transactions.length,
+              itemBuilder: (ctx, index) {
+                final tr = transactions[index];
+                return Card(
+                  elevation: 5,
+                  margin: const EdgeInsets.symmetric(
+                    vertical: 5,
+                    horizontal: 8,
+                  ),
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      radius: 30,
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      child: Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: FittedBox(
+                          child: Text(
+                            'R\$${tr.value}',
+                            style: const TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    title: Text(
+                      tr.title,
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
+                    subtitle: Text(
+                      DateFormat('d MMM y').format(tr.date),
+                    ),
+                    trailing: IconButton(
+                      icon: const Icon(Icons.delete),
+                      color: Theme.of(context).errorColor,
+                      onPressed: () => onRemove(tr.id),
+                    ),
+                  ),
+                );
+              },
             ),
-          );
-        },
-      ),
     );
   }
 }
