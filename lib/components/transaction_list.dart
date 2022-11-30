@@ -4,8 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:expenses/models/transaction.dart';
 
 class TransactionList extends StatelessWidget {
-  const TransactionList({Key? key, required this.transactions})
-      : super(key: key);
+  const TransactionList(this.transactions, {Key? key}) : super(key: key);
 
   final List<Transaction> transactions;
 
@@ -51,7 +50,12 @@ class TransactionList extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(6.0),
                         child: FittedBox(
-                          child: Text('R\$${tr.value}'),
+                          child: Text(
+                            'R\$${tr.value}',
+                            style: const TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
                       ),
                     ),

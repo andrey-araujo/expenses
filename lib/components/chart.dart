@@ -5,7 +5,7 @@ import 'package:expenses/components/chart_bar.dart';
 import 'package:expenses/models/transaction.dart';
 
 class Chart extends StatelessWidget {
-  const Chart({Key? key, required this.recentTransactions}) : super(key: key);
+  const Chart(this.recentTransactions, {Key? key}) : super(key: key);
 
   final List<Transaction> recentTransactions;
 
@@ -31,7 +31,7 @@ class Chart extends StatelessWidget {
         'day': DateFormat.E().format(weekDay)[0],
         'value': totalSum,
       };
-    });
+    }).reversed.toList();
   }
 
   double get _weekTotalValue {

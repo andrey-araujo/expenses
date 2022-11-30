@@ -6,34 +6,37 @@ import 'package:expenses/components/transaction_form.dart';
 import 'components/transaction_list.dart';
 import 'models/transaction.dart';
 
-void main() => runApp(const ExpensesApp());
+void main() => runApp(ExpensesApp());
 
 class ExpensesApp extends StatelessWidget {
-  const ExpensesApp({Key? key}) : super(key: key);
+  ExpensesApp({Key? key}) : super(key: key);
+
+  final ThemeData tema = ThemeData();
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: const MyHomePage(),
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
-            .copyWith(secondary: Colors.pink[300]),
-        fontFamily: 'Quicksand',
+      theme: tema.copyWith(
+        colorScheme: tema.colorScheme.copyWith(
+          primary: Colors.purple,
+          secondary: Colors.amber,
+        ),
+        textTheme: tema.textTheme.copyWith(
+          headline6: const TextStyle(
+            fontFamily: 'OpenSans',
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
         appBarTheme: const AppBarTheme(
           titleTextStyle: TextStyle(
             fontFamily: 'OpenSans',
-            fontSize: 25,
+            fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
         ),
-        textTheme: ThemeData.light().textTheme.copyWith(
-              headline6: const TextStyle(
-                fontFamily: 'OpenSans',
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-            ),
       ),
     );
   }
@@ -70,13 +73,13 @@ class _MyHomePageState extends State<MyHomePage> {
       id: 't3',
       title: 'Cartão de Crédito',
       value: 100211.30,
-      date: DateTime.now().subtract(const Duration(days: 4)),
+      date: DateTime.now().subtract(const Duration(days: 0)),
     ),
     Transaction(
       id: 't4',
       title: 'Lanche',
       value: 14.30,
-      date: DateTime.now().subtract(const Duration(days: 4)),
+      date: DateTime.now().subtract(const Duration(days: 1)),
     ),
   ];
 
@@ -108,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
     showModalBottomSheet(
       context: context,
       builder: (_) {
-        return TransactionForm(onSubmit: _addTransaction);
+        return TransactionForm(_addTransaction);
       },
     );
   }
@@ -130,8 +133,8 @@ class _MyHomePageState extends State<MyHomePage> {
           // mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Chart(recentTransactions: _recentTransactions),
-            TransactionList(transactions: _transactions),
+            Chart(_recentTransactions),
+            TransactionList(_transactions),
           ],
         ),
       ),
