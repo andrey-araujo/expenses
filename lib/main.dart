@@ -58,30 +58,6 @@ class _MyHomePageState extends State<MyHomePage> {
     //   value: 400.76,
     //   date: DateTime.now().subtract(const Duration(days: 33)),
     // ),
-    // Transaction(
-    //   id: 't1',
-    //   title: 'Novo Tênis de corrida',
-    //   value: 310.76,
-    //   date: DateTime.now().subtract(const Duration(days: 3)),
-    // ),
-    // Transaction(
-    //   id: 't2',
-    //   title: 'Conta de Luz',
-    //   value: 211.30,
-    //   date: DateTime.now().subtract(const Duration(days: 4)),
-    // ),
-    // Transaction(
-    //   id: 't3',
-    //   title: 'Cartão de Crédito',
-    //   value: 100211.30,
-    //   date: DateTime.now().subtract(const Duration(days: 0)),
-    // ),
-    // Transaction(
-    //   id: 't4',
-    //   title: 'Lanche',
-    //   value: 14.30,
-    //   date: DateTime.now().subtract(const Duration(days: 1)),
-    // ),
   ];
 
   //criando gatter para realizar a filtragem das transações nos ultimos 7 dias
