@@ -4,9 +4,10 @@ import 'package:intl/intl.dart';
 import 'package:expenses/models/transaction.dart';
 
 class TransactionList extends StatelessWidget {
-  const TransactionList(this.transactions, {Key? key}) : super(key: key);
+  const TransactionList(this.transactions, this.onRemove, {Key? key}) : super(key: key);
 
   final List<Transaction> transactions;
+  final void Function(String) onRemove;
 
   @override
   Widget build(BuildContext context) {
@@ -67,55 +68,13 @@ class TransactionList extends StatelessWidget {
                     subtitle: Text(
                       DateFormat('d MMM y').format(tr.date),
                     ),
+                    trailing: IconButton(
+                      icon: const Icon(Icons.delete),
+                      color: Theme.of(context).errorColor,
+                      onPressed: () => onRemove(tr.id),
+                    ),
                   ),
                 );
-                // return Card(
-                //   child: Row(
-                //     children: [
-                //       Container(
-                //         margin: const EdgeInsets.symmetric(
-                //           horizontal: 15,
-                //           vertical: 10,
-                //         ),
-                //         decoration: BoxDecoration(
-                //           border: Border.all(
-                //             color: Theme.of(context).colorScheme.primary,
-                //             width: 2,
-                //           ),
-                //         ),
-                //         padding: const EdgeInsets.all(6),
-                //         child: Text(
-                //           'R\$ ${tr.value.toStringAsFixed(2)}',
-                //           style: TextStyle(
-                //             fontWeight: FontWeight.bold,
-                //             fontSize: 13,
-                //             color: Theme.of(context).colorScheme.primary,
-                //           ),
-                //         ),
-                //       ),
-                //       Column(
-                //         // mainAxisAlignment: MainAxisAlignment.start,
-                //         crossAxisAlignment: CrossAxisAlignment.start,
-                //         children: [
-                //           Text(
-                //             tr.title,
-                //             style: Theme.of(context).textTheme.headline6,
-                //             // style: const TextStyle(
-                //             //   fontWeight: FontWeight.bold,
-                //             //   fontSize: 16,
-                //             // ),
-                //           ),
-                //           Text(
-                //             DateFormat('d MMM y').format(tr.date),
-                //             style: const TextStyle(
-                //               color: Colors.grey,
-                //             ),
-                //           ),
-                //         ],
-                //       ),
-                //     ],
-                //   ),
-                // );
               },
             ),
     );
