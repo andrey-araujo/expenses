@@ -66,6 +66,18 @@ class _MyHomePageState extends State<MyHomePage> {
       value: 211.30,
       date: DateTime.now().subtract(const Duration(days: 4)),
     ),
+    Transaction(
+      id: 't3',
+      title: 'Cartão de Crédito',
+      value: 100211.30,
+      date: DateTime.now().subtract(const Duration(days: 4)),
+    ),
+    Transaction(
+      id: 't4',
+      title: 'Lanche',
+      value: 14.30,
+      date: DateTime.now().subtract(const Duration(days: 4)),
+    ),
   ];
 
   //criando gatter para realizar a filtragem das transações nos ultimos 7 dias
